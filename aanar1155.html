@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Математик үйлдэл</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: brown;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 600px;
+        }
+
+        label {
+            display: inline-block;
+            width: 130px;
+            margin-bottom: 15px;
+        }
+
+        input {
+            padding: 8px;
+            width: 200px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: lightblue;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: skyblue;
+        }
+
+        #result {
+            font-size: 20px;
+            font-weight: bold;
+            color: green;
+            margin-top: 20px;
+        }
+
+        .data {
+            background: #e8f4ff;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        .history {
+            background: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        .clear {
+            background: lightcoral;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Математик үйлдэл</h1>
+
+    <label>Эхний тоо:</label>
+    <input type="number" id="num1">
+
+    <br><br>
+
+    <label>Хоёр дахь тоо:</label>
+    <input type="number" id="num2">
+
+    <br><br>
+
+    <button onclick="calculate('+')">Нэмэх (+)</button>
+    <button onclick="calculate('-')">Хасах (-)</button>
+    <button onclick="calculate('*')">Үржих (×)</button>
+    <button onclick="calculate('/')">Хуваах (÷)</button>
+
+    <p id="result">Үр дүн энд харагдана.</p>
+
+    <!-- Өгөгдөл харуулах хэсэг -->
+    <div class="data">
+        <h2>Оруулсан өгөгдөл</h2>
+        <p id="data1">Эхний тоо: -</p>
+        <p id="data2">Хоёр дахь тоо: -</p>
+        <p id="operation">Үйлдэл: -</p>
+        <p id="answer">Хариу: -</p>
+    </div>
+
+    <!-- Үйлдлийн түүх -->
+    <div class="history">
+        <h2>Үйлдлийн түүх</h2>
+        <ul id="historyList"></ul>
+
+        <button class="clear" onclick="clearHistory()">
+            Түүх цэвэрлэх
+        </button>
+    </div>
+
+</div>
+
+<script>
+
+    let history = [];
+
+    function calculate(operator) {
+
+        let a = document.getElementById("num1").value;
+        let b = document.getElementById("num2").value;
+
+        let resultElement = document.getElementById("result");
+
+        if (a === "" || b === "") {
+            resultElement.innerHTML = "Хоёр тоогоо оруулна уу!";
+            return;
+        }
+
+        a = Number(a);
+        b = Number(b);
+
+        let answer;
+        let operation;
+
+        if (operator === "+") {
+            answer = a + b;
+            operation = "Нэмэх";
+        }
+        else if (operator === "-") {
+            answer = a - b;
+            operation = "Хасах";
+        }
+        else if (operator === "*") {
+            answer = a * b;
+            operation = "Үржих";
+        }
+        else if (operator === "/") {
+
+            if (b === 0) {
+                resultElement.innerHTML = "0-д хувааж болохгүй!";
+                return;
+            }
+
+            answer = a / b;
+            operation = "Хуваах";
+        }
+
+        // Үр дүн харуулах
+        resultElement.innerHTML = "Үр дүн: " + answer;
+
+        // Өгөгдөл харуулах
+        document.getElementById("data1").innerHTML =
+            "Эхний тоо: " + a;
+
+        document.getElementById("data2").innerHTML =
+            "Хоёр дахь тоо: " + b;
+
+        document.getElementById("operation").innerHTML =
+            "Үйлдэл: " + operation;
+
+        document.getElementById("answer").innerHTML =
+            "Хариу: " + answer;
+
+        // Түүхэнд хадгалах
+        let record = a + " " + operator + " " + b + " = " + answer;
+
+        history.push(record);
+
+        showHistory();
+    }
+
+    // Үйлдлийн түүх харуулах
+    function showHistory() {
+
+        let list = document.getElementById("historyList");
+
+        list.innerHTML = "";
+
+        history.forEach(function(item, index) {
+
+            let li = document.createElement("li");
+
+            li.textContent = (index + 1) + ". " + item;
+
+            list.appendChild(li);
+
+        });
+    }
+
+    // Түүх цэвэрлэх
+    function clearHistory() {
+
+        history = [];
+
+        showHistory();
+
+        document.getElementById("result").innerHTML =
+            "Түүх цэвэрлэгдлээ.";
+
+    }
+
+</script>
+
+</body>
+</html>
