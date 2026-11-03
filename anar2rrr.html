@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Математик үйлдэл</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: white;
+        }
+
+        h1 {
+            color: brown;
+        }
+
+        label {
+            display: inline-block;
+            width: 130px;
+            margin-bottom: 15px;
+        }
+
+        input {
+            padding: 8px;
+            width: 200px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 8px 15px;
+            background-color: lightblue;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            color: green;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Математик үйлдэл</h1>
+
+    <label for="num1">Эхний тоо:</label>
+    <input type="number" id="num1">
+
+    <br><br>
+
+    <label for="num2">Хоёр дахь тоо:</label>
+    <input type="number" id="num2">
+
+    <br><br>
+
+    <button onclick="addNumbers()">Нэмэх (+)</button>
+    <button onclick="subtractNumbers()">Хасах (-)</button>
+    <button onclick="multiplyNumbers()">Үржих (×)</button>
+    <button onclick="divideNumbers()">Хуваах (÷)</button>
+
+    <p id="result">Үр дүн энд харагдана.</p>
+
+    <script>
+
+        function addNumbers() {
+            let a = document.getElementById("num1").value;
+            let b = document.getElementById("num2").value;
+
+            if (a === "" || b === "") {
+                document.getElementById("result").innerHTML =
+                    "Хоёр тоогоо оруулна уу!";
+                return;
+            }
+
+            let sum = Number(a) + Number(b);
+
+            document.getElementById("result").innerHTML =
+                "Нийлбэр: " + sum;
+        }
+
+        function subtractNumbers() {
+            let a = document.getElementById("num1").value;
+            let b = document.getElementById("num2").value;
+
+            if (a === "" || b === "") {
+                document.getElementById("result").innerHTML =
+                    "Хоёр тоогоо оруулна уу!";
+                return;
+            }
+
+            let difference = Number(a) - Number(b);
+
+            document.getElementById("result").innerHTML =
+                "Ялгавар: " + difference;
+        }
+
+        function multiplyNumbers() {
+            let a = document.getElementById("num1").value;
+            let b = document.getElementById("num2").value;
+
+            if (a === "" || b === "") {
+                document.getElementById("result").innerHTML =
+                    "Хоёр тоогоо оруулна уу!";
+                return;
+            }
+
+            let product = Number(a) * Number(b);
+
+            document.getElementById("result").innerHTML =
+                "Үржвэр: " + product;
+        }
+
+        function divideNumbers() {
+            let a = document.getElementById("num1").value;
+            let b = document.getElementById("num2").value;
+
+            if (a === "" || b === "") {
+                document.getElementById("result").innerHTML =
+                    "Хоёр тоогоо оруулна уу!";
+                return;
+            }
+
+            if (Number(b) === 0) {
+                document.getElementById("result").innerHTML =
+                    "0-д хувааж болохгүй!";
+                return;
+            }
+
+            let quotient = Number(a) / Number(b);
+
+            document.getElementById("result").innerHTML =
+                "Ноогдвор: " + quotient;
+        }
+
+    </script>
+
+</body>
+</html>
